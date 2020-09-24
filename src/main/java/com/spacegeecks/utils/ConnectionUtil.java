@@ -1,4 +1,4 @@
-package utils;
+package com.spacegeecks.utils;
 
 
 import java.io.IOException;
