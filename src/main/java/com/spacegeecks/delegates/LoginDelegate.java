@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.spacegeecks.User;
+import com.spacegeecks.beans.User;
 import com.spacegeecks.data.UserPostgres;
 import com.spacegeecks.services.UserService;
 

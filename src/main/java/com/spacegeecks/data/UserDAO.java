@@ -8,7 +8,7 @@ public interface UserDAO {
 	
 	public int createUser(User u);
 	public Set<User> findUsers();
-	public Set<User> findUsersByTransaction(Transaction t);
+	public User findUserByTransaction(Transaction t);
 	public Set<User> findUsersByRole(Role r);
 	public User findUserByUsername(String username);
 	public User findUserByEmail(String email);
