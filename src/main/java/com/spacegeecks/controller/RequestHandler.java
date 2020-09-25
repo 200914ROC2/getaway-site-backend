@@ -8,7 +8,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.spacegeecks.delegates.LogoutDelegate;
 import com.spacegeecks.delegates.FrontControllerDelegate;
+import com.spacegeecks.delegates.LoginDelegate;
+import com.spacegeecks.delegates.RegistrationDelegate;
 
 
 public class RequestHandler {
