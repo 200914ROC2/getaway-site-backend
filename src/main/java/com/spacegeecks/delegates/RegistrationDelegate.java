@@ -42,7 +42,6 @@ public class RegistrationDelegate implements FrontControllerDelegate {
 			u.setLastName((String) jsonMap.get("lastname"));
 			Role r = new Role();
 			r = uServ.getRoleByName("standard");
-			System.out.println("Role: " + r.toString());
 			uServ.updatePassword(u, password); // The object mapper sets the pw to plantext; this hashes it.
 			u.setRole(r);
 		} else {
