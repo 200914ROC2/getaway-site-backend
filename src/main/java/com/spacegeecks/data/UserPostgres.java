@@ -23,7 +23,7 @@ public class UserPostgres implements UserDAO {
 			conn.setAutoCommit(false);
 			String sql = "INSERT INTO space_user VALUES "
 					+ "(default, ?, ?, ?, ?, ?, ?)";
-			String[] keys = {"user_id"};
+			String[] keys = {"id"};
 			PreparedStatement pstmt = conn.prepareStatement(sql, keys);
 			pstmt.setString(1, u.getUsername());
 			pstmt.setString(2, u.getPassword());
@@ -66,7 +66,7 @@ public class UserPostgres implements UserDAO {
 				Role r = this.findRoleById(rs.getInt("role_type"));
 				
 				User u = new User();
-				u.setUserId(rs.getInt("user_id"));
+				u.setUserId(rs.getInt("id"));
 				u.setUsername(rs.getString("username"));
 				u.setPassword(rs.getString("passwd"));
 				u.setFirstName(rs.getString("first_name"));
@@ -106,7 +106,7 @@ public class UserPostgres implements UserDAO {
 			
 			while(rs.next()) {
 				User u = new User();
-				u.setUserId(rs.getInt("user_id"));
+				u.setUserId(rs.getInt("id"));
 				u.setUsername(rs.getString("username"));
 				u.setPassword(rs.getString("passwd"));
 				u.setFirstName(rs.getString("first_name"));
@@ -145,7 +145,7 @@ public class UserPostgres implements UserDAO {
 				u = new User();
 				Role r = this.findRoleById(rs.getInt("role_type"));
 
-				u.setUserId(rs.getInt("user_id"));
+				u.setUserId(rs.getInt("id"));
 				u.setUsername(rs.getString("username"));
 				u.setPassword(rs.getString("passwd"));
 				u.setFirstName(rs.getString("first_name"));
@@ -182,7 +182,7 @@ public class UserPostgres implements UserDAO {
 				u = new User();
 				Role r = this.findRoleById(rs.getInt("role_type"));
 
-				u.setUserId(rs.getInt("user_id"));
+				u.setUserId(rs.getInt("id"));
 				u.setUsername(rs.getString("username"));
 				u.setPassword(rs.getString("passwd"));
 				u.setFirstName(rs.getString("first_name"));
@@ -208,7 +208,7 @@ public class UserPostgres implements UserDAO {
 		try (Connection conn = cu.getConnection()) {
 			conn.setAutoCommit(false);
 			String sql = "SELECT * FROM space_user " +
-					"WHERE user_id = ?";
+					"WHERE id = ?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1,userId);
 			
