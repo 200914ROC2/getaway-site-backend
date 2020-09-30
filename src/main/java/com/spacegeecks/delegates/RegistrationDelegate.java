@@ -1,6 +1,7 @@
 package com.spacegeecks.delegates;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -27,15 +28,25 @@ public class RegistrationDelegate implements FrontControllerDelegate {
 
 	private void register(HttpServletRequest request, HttpServletResponse response) 
 			throws IOException {
-		User u = null;
+		User u = new User();
 		UserService uServ = new UserService(new UserPostgres());
 		ObjectMapper om = new ObjectMapper();
+
+		Map<String, Object> jsonMap = om.readValue(request.getInputStream(), Map.class);
 		
-		u = om.readValue(request.getInputStream(), User.class);
-		Role r = new Role();
-		r = uServ.getRoleByName("standard");
-		uServ.updatePassword(u, u.getPassword()); // The object mapper sets the pw to plantext; this hashes it.
-		u.setRole(r);
+		if (jsonMap.containsKey("username") && jsonMap.containsKey("password") && jsonMap.containsKey("email") && jsonMap.containsKey("firstname") && jsonMap.containsKey("lastname")) {
+			u.setUsername((String) jsonMap.get("username"));
+			String password = (String) jsonMap.get("password");
+			u.setEmail((String) jsonMap.get("email"));
+			u.setFirstName((String) jsonMap.get("firstname"));
+			u.setLastName((String) jsonMap.get("lastname"));
+			Role r = new Role();
+			r = uServ.getRoleByName("standard");
+			uServ.updatePassword(u, password); // The object mapper sets the pw to plantext; this hashes it.
+			u.setRole(r);
+		} else {
+			response.sendError(400, "All fields required.");
+		}
 		
 		if (isUnique(u.getUsername(), u.getEmail())) {
 			int uId = uServ.registerUser(u);
