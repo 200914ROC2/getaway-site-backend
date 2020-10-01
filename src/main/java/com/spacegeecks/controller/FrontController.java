@@ -19,7 +19,6 @@ public class FrontController extends HttpServlet {
 	private void process(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		response.addHeader("Access-Control-Allow-Origin", "http://spacegeecks.s3-website.us-east-2.amazonaws.com");
-		response.addHeader("Access-Control-Allow-Origin", "http://localhost");
 		FrontControllerDelegate fcd = rh.handle(request, response);
 		
 		if (fcd != null)
