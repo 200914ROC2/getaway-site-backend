@@ -18,7 +18,7 @@ public class FrontController extends HttpServlet {
        
 	private void process(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		FrontControllerDelegate fcd = rh.handle(request, response);
 		
 		if (fcd != null)
