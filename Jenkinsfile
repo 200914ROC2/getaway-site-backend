@@ -6,8 +6,12 @@ pipeline {
         stage('stop old app') {
             steps {
 
-                echo 'Hello World'
+                echo 'need to shut down server'
             }
+        }
+
+        stage('start up server again'){
+            echo 'need to start up server'
         }
     }
 }
