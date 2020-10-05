@@ -15,7 +15,9 @@ pipeline {
         }
         stage('copy app'){
             steps{
-                sh 'cp target/*.war ~/apache-tomcat-9.0.38/webapps'
+                sh '''
+                pwd
+                cp target/*.war ~/apache-tomcat-9.0.38/webapps'''
             }
         }
         stage('start new app'){
