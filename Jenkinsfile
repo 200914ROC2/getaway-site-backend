@@ -5,18 +5,24 @@ pipeline {
     stages {
         stage('stop old app') {
             steps {
-                echo 'Typically this is where I would stop my server'
+                echo 'stop server'
+            }
+        }
+        stage('building app){
+            steps{
+                sh 'mvn clean package'
+            }
+        }
+        stage('copy app){
+            steps{
+                sh 'cp target/spacegeeks.war ~/apache-tomcat-9.0.38/webapps'
             }
         }
         stage('start new app'){
             steps{
-                echo 'start up the server'
+                echo 'start server'
             }
         }
-        stage('new step'){
-            steps{
-                echo 'hello'
-            }
-        }
+        
     }
 }
