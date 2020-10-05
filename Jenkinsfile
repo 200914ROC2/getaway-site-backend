@@ -1,17 +1,17 @@
+
 pipeline {
-
     agent any
-    stages {
 
+    stages {
         stage('stop old app') {
             steps {
-
-                echo 'need to shut down server'
+                echo 'Typically this is where I would stop my server'
             }
         }
-
-        stage('start up server again'){
-            echo 'need to start up server'
+        stage('start new app'){
+            steps{
+                echo 'start up the server'
+            }
         }
     }
 }
