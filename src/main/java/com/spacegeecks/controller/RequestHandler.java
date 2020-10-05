@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.spacegeecks.delegates.LogoutDelegate;
+import com.spacegeecks.delegates.CartDelegate;
 import com.spacegeecks.delegates.FrontControllerDelegate;
 import com.spacegeecks.delegates.LoginDelegate;
 import com.spacegeecks.delegates.RegistrationDelegate;
+import com.spacegeecks.delegates.StoreDelegate;
 
 
 public class RequestHandler {
@@ -24,6 +26,8 @@ private Map<String, FrontControllerDelegate> delegateMap;
 		delegateMap.put("login", new LoginDelegate());
 		delegateMap.put("logout", new LogoutDelegate());
 		delegateMap.put("register", new RegistrationDelegate());
+		delegateMap.put("store", new StoreDelegate());
+		delegateMap.put("cart", new CartDelegate());
 
 	}
 
