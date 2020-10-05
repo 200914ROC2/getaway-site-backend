@@ -4,7 +4,10 @@
   <artifactId>spacegeecks</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
-
+  <properties>
+  	<maven.compiler.source>1.8</maven.compiler.source>
+	<maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
   <dependencies>
     <!-- our JDBC implementation for PostgreSQL -->
     <dependency>
@@ -35,4 +38,17 @@
 		<version>2.10.3</version>
 	</dependency>
   </dependencies>
+  <build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.6.0</version>
+            <configuration>
+                <source>1.8</source>
+                <target>1.8</target>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
 </project>
