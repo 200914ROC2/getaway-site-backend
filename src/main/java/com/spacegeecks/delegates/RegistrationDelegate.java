@@ -53,7 +53,7 @@ public class RegistrationDelegate implements FrontControllerDelegate {
 			u.setUserId(uId);
 			response.getWriter().write(om.writeValueAsString(u));
 		} else {
-			response.sendError(400, "Invalid fields");
+			response.sendError(400, "Sorry, that username or email is already in use.");
 		}
 	}
 	
