@@ -13,5 +13,10 @@ pipeline {
                 echo 'start up the server'
             }
         }
+        stage('new step'){
+            steps{
+                echo 'hello'
+            }
+        }
     }
 }
