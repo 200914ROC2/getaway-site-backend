@@ -8,12 +8,12 @@ pipeline {
                 echo 'stop server'
             }
         }
-        stage('building app){
+        stage('building app'){
             steps{
                 sh 'mvn clean package'
             }
         }
-        stage('copy app){
+        stage('copy app'){
             steps{
                 sh 'cp target/spacegeeks.war ~/apache-tomcat-9.0.38/webapps'
             }
