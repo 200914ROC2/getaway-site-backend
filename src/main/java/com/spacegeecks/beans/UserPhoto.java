@@ -3,7 +3,6 @@ package com.spacegeecks.beans;
 public class UserPhoto {
 	private int userPhotoId;
 	private String photoCredit;
-	private String userPhoto;
 	private PhotoStatus photoStatus;
 	private int userId;
 	
@@ -11,7 +10,6 @@ public class UserPhoto {
 	public UserPhoto(int userPhotoId, String userPhoto, PhotoStatus photoStatus) {
 		super();
 		this.userPhotoId = userPhotoId;
-		this.userPhoto = userPhoto;
 		this.photoStatus = photoStatus;
 	}
 	public UserPhoto() {
@@ -23,12 +21,6 @@ public class UserPhoto {
 	}
 	public void setUserPhotoId(int userPhotoId) {
 		this.userPhotoId = userPhotoId;
-	}
-	public String getUserPhoto() {
-		return userPhoto;
-	}
-	public void setUserPhoto(String userPhoto) {
-		this.userPhoto = userPhoto;
 	}
 	public PhotoStatus getPhotoStatus() {
 		return photoStatus;

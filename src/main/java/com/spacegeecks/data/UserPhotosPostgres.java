@@ -1,28 +1,11 @@
 package com.spacegeecks.data;
 
-import java.sql.Array;
-import java.sql.Blob;
-import java.sql.CallableStatement;
-import java.sql.Clob;
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.NClob;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLClientInfoException;
-import java.sql.SQLException;
-import java.sql.SQLWarning;
-import java.sql.SQLXML;
-import java.sql.Savepoint;
 import java.sql.Statement;
-import java.sql.Struct;
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Properties;
 import java.util.Set;
-import java.util.concurrent.Executor;
 
 import com.spacegeecks.beans.PhotoStatus;
 import com.spacegeecks.beans.UserPhoto;
@@ -46,7 +29,6 @@ public class UserPhotosPostgres implements UserPhotosDAO {
 				UserPhoto userPhoto = new UserPhoto();
 				userPhoto.setUserPhotoId(rs.getInt(rs.getInt("id")));
 				userPhoto.setPhotoStatus(status);
-				userPhoto.setUserPhoto(rs.getString("user_photo"));
 				userPhoto.setPhotoCredit(rs.getString("photo_credit"));
 				userPhoto.setUserId(rs.getInt("user_id"));
 				
@@ -73,7 +55,6 @@ public class UserPhotosPostgres implements UserPhotosDAO {
 				UserPhoto userPhoto = new UserPhoto();
 				userPhoto.setUserPhotoId(rs.getInt(rs.getInt("id")));
 				userPhoto.setPhotoStatus(status);
-				userPhoto.setUserPhoto(rs.getString("user_photo"));
 				userPhoto.setPhotoCredit(rs.getString("photo_credit"));
 				userPhoto.setUserId(rs.getInt("user_id"));
 				
@@ -113,10 +94,9 @@ public class UserPhotosPostgres implements UserPhotosDAO {
 	public int addUserPhoto(UserPhoto userPhoto) {
 		int id;
 		try(Connection conn = cu.getConnection()){
-			String sql = "INSERT INTO user_photo VALUES (default, ?, ?, ?, ?)";
+			String sql = "INSERT INTO user_photo VALUES (default, ?, ?, ?)";
 			String[] keys = {"id"};
 			PreparedStatement pst = conn.prepareStatement(sql, keys);
-			pst.setString(1, userPhoto.getUserPhoto());
 			pst.setString(2, userPhoto.getPhotoCredit());
 			pst.setInt(3, userPhoto.getUserId());
 			pst.setInt(4, userPhoto.getPhotoStatus().getPhotoStatusId());
