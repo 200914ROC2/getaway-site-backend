@@ -33,6 +33,7 @@ public class StoreDelegate implements FrontControllerDelegate {
 				TransactionStatus ts = new TransactionStatus();
 				ts = tServ.findTStatusByName("open");
 				t.setStatus(ts);
+				System.out.println("this is the user" + (User) request.getSession().getAttribute("user"));
 				
 				if (jsonMap.containsKey("price") && jsonMap.containsKey("listing_id") && jsonMap.containsKey("title") && jsonMap.containsKey("image")) {
 					
