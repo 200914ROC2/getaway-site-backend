@@ -34,7 +34,7 @@ public class StoreDelegate implements FrontControllerDelegate {
 				if (jsonMap.containsKey("price") && jsonMap.containsKey("listing_id") && jsonMap.containsKey("title") && jsonMap.containsKey("image")) {
 					
 					t.setPrice((double) jsonMap.get("price"));
-					t.setListingId((String) jsonMap.get("listing_id"));
+					t.setListingId(((Integer) jsonMap.get("listing_id")).toString());
 					t.setTitle((String) jsonMap.get("title"));
 					t.setImage((String) jsonMap.get("image"));
 					

@@ -42,8 +42,9 @@ public class LoginDelegate implements FrontControllerDelegate {
 			request.getSession().setAttribute("user", u);
 			response.getWriter().write((om.writeValueAsString(u)));
 		} else {
-			response.setHeader("INCORRECT_CREDENTIALS", "Incorrect credentials");
-			response.sendError(400, "Incorrect credentials.");
+			response.setHeader("INCORRECT_CREDENTIALS", "Incorrect cr");
+			response.sendError(400, "invalid credentials");
+		
 		}
 	}
 	
