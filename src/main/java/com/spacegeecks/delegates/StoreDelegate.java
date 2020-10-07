@@ -32,7 +32,6 @@ public class StoreDelegate implements FrontControllerDelegate {
 				Map<String, Object> jsonMap = om.readValue(request.getInputStream(), Map.class);
 				
 				if (jsonMap.containsKey("price") && jsonMap.containsKey("listing_id") && jsonMap.containsKey("title") && jsonMap.containsKey("image")) {
-
 					t.setPrice(Double.parseDouble((String) jsonMap.get("price")));
 					t.setListingId(((Integer) jsonMap.get("listing_id")).toString());
 					t.setTitle((String) jsonMap.get("title"));
