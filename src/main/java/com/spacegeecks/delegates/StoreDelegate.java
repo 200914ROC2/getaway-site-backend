@@ -1,3 +1,67 @@
+<<<<<<< HEAD
+package com.spacegeecks.delegates;
+
+import java.io.IOException;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.spacegeecks.beans.Role;
+import com.spacegeecks.beans.Transaction;
+import com.spacegeecks.beans.TransactionStatus;
+import com.spacegeecks.beans.User;
+import com.spacegeecks.data.TransactionPostgres;
+import com.spacegeecks.services.TransactionService;
+
+
+public class StoreDelegate implements FrontControllerDelegate {
+
+	private TransactionService tServ = new TransactionService(new TransactionPostgres());
+	
+	@Override
+	public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		User uSession = (User) request.getSession().getAttribute("user");
+		Transaction t = new Transaction();
+		ObjectMapper om = new ObjectMapper();
+		
+		if ("POST".equals(request.getMethod())) {
+			if (uSession != null) {
+				Map<String, Object> jsonMap = om.readValue(request.getInputStream(), Map.class);
+				
+				TransactionStatus ts = new TransactionStatus();
+				ts = tServ.findTStatusByName("open");
+				t.setStatus(ts);
+				
+				if (jsonMap.containsKey("price") && jsonMap.containsKey("listing_id") && jsonMap.containsKey("title") && jsonMap.containsKey("image")) {
+					
+					t.setPrice(Double.parseDouble((String) jsonMap.get("price")));
+					t.setListingId(((Integer) jsonMap.get("listing_id")));
+					t.setTitle((String) jsonMap.get("title"));
+					t.setImage((String) jsonMap.get("image"));
+					
+					t.setUserId(uSession.getUserId());
+					
+					t.setId(tServ.addToCart(uSession, t));
+					
+					response.getWriter().write(om.writeValueAsString(t));
+				} else {
+					response.sendError(400, "Field listing error.");
+				}
+			} else {
+				response.sendError(400, "Must be logged in to shop.");
+			}
+		} else {
+			response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+		}
+		
+	}
+	
+}
+=======
 package com.spacegeecks.delegates;
 
 import java.io.IOException;
@@ -33,8 +97,8 @@ public class StoreDelegate implements FrontControllerDelegate {
 				
 				if (jsonMap.containsKey("price") && jsonMap.containsKey("listing_id") && jsonMap.containsKey("title") && jsonMap.containsKey("image")) {
 					
-					t.setPrice((double) jsonMap.get("price"));
-					t.setListingId((String) jsonMap.get("listing_id"));
+					t.setPrice(Double.parseDouble((String) jsonMap.get("price")));
+					t.setListingId(((Integer) jsonMap.get("listing_id")));
 					t.setTitle((String) jsonMap.get("title"));
 					t.setImage((String) jsonMap.get("image"));
 					
@@ -42,6 +106,7 @@ public class StoreDelegate implements FrontControllerDelegate {
 					
 					TransactionStatus ts = new TransactionStatus();
 					ts = tServ.findTStatusByName("open");
+					t.setStatus(ts);
 					
 					t.setId(tServ.addToCart(uSession, t));
 					
@@ -59,3 +124,4 @@ public class StoreDelegate implements FrontControllerDelegate {
 	}
 	
 }
+>>>>>>> 6c93fbc07e269d496fe07a447dca08520e0ab5d0

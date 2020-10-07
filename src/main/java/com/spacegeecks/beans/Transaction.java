@@ -10,7 +10,7 @@ public class Transaction {
 	private Timestamp timeStamp;
 	private TransactionStatus status; // open, sale, return, canceled
 	private int userId;
-	private String listingId;
+	private int listingId;
 	private String title;
 	private String image;
 	
@@ -20,7 +20,7 @@ public class Transaction {
 		timeStamp = Timestamp.valueOf(LocalDateTime.now());
 		status = new TransactionStatus();
 		userId = 0;
-		listingId = "ETSY";
+		listingId = 0;
 		title = "OBJECT";
 		image = "IMAGE";
 	}
@@ -65,11 +65,11 @@ public class Transaction {
 		this.id = transactionId;
 	}
 
-	public String getListingId() {
+	public int getListingId() {
 		return listingId;
 	}
 
-	public void setListingId(String listingId) {
+	public void setListingId(int listingId) {
 		this.listingId = listingId;
 	}
 
