@@ -32,24 +32,22 @@ public class StoreDelegate implements FrontControllerDelegate {
 				Map<String, Object> jsonMap = om.readValue(request.getInputStream(), Map.class);
 				
 				if (jsonMap.containsKey("price") && jsonMap.containsKey("listing_id") && jsonMap.containsKey("title") && jsonMap.containsKey("image")) {
+					
 					t.setPrice(Double.parseDouble((String) jsonMap.get("price")));
-					t.setListingId(((Integer) jsonMap.get("listing_id")).toString());
+					t.setListingId(((Integer) jsonMap.get("listing_id")));
 					t.setTitle((String) jsonMap.get("title"));
 					t.setImage((String) jsonMap.get("image"));
 					
 					t.setUserId(uSession.getUserId());
-
 					
 					TransactionStatus ts = new TransactionStatus();
 					ts = tServ.findTStatusByName("open");
+					t.setStatus(ts);
 					
 					t.setId(tServ.addToCart(uSession, t));
-				
-					System.out.println(t.toString());
 					
 					response.getWriter().write(om.writeValueAsString(t));
 				} else {
-					
 					response.sendError(400, "Field listing error.");
 				}
 			} else {

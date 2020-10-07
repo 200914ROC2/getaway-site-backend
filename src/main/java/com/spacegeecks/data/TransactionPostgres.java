@@ -33,7 +33,7 @@ public class TransactionPostgres implements TransactionDAO {
 			pstmt.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
 			pstmt.setInt(3, ts.getId());
 			pstmt.setInt(4, u.getUserId());
-			pstmt.setString(5, t.getListingId());
+			pstmt.setInt(5, t.getListingId());
 			pstmt.setString(6, t.getTitle());
 			pstmt.setString(7,t.getImage());
 			
@@ -115,7 +115,7 @@ public class TransactionPostgres implements TransactionDAO {
 				t.setPrice(rs.getDouble("price"));
 				t.setTimeStamp(rs.getTimestamp("time_stamp"));
 				t.setUserId(u.getUserId());
-				t.setListingId(rs.getString("listing_id"));
+				t.setListingId(rs.getInt("listing_id"));
 				t.setTitle(rs.getString("title"));
 				t.setImage(rs.getString("image"));
 								
