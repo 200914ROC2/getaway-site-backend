@@ -6,77 +6,87 @@ import java.time.LocalDateTime;
 public class Transaction {
 
 	private int id;
-	private Double amount;
+	private double price;
 	private Timestamp timeStamp;
 	private TransactionStatus status; // open, sale, return, canceled
 	private int userId;
-	private int merchandiseId;
+	private String listingId;
+	private String title;
+	private String image;
 	
 	public Transaction() {
 		id = 0;
-		amount = 0.0;
+		price = 0.0;
 		timeStamp = Timestamp.valueOf(LocalDateTime.now());
 		status = new TransactionStatus();
 		userId = 0;
-		merchandiseId = 0;
+		listingId = "ETSY";
+		title = "OBJECT";
+		image = "IMAGE";
 	}
 	
-	
-	public Double getAmount() {
-		return amount;
+	public double getPrice() {
+		return price;
 	}
 
-
-	public void setAmount(Double amount) {
-		this.amount = amount;
+	public void setPrice(double price) {
+		this.price = price;
 	}
-
 
 	public Timestamp getTimeStamp() {
 		return timeStamp;
 	}
 
-
 	public void setTimeStamp(Timestamp timeStamp) {
 		this.timeStamp = timeStamp;
 	}
-
 
 	public TransactionStatus getStatus() {
 		return status;
 	}
 
-
 	public void setStatus(TransactionStatus status) {
 		this.status = status;
 	}
-
 
 	public int getUserId() {
 		return userId;
 	}
 
-
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
-
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int transactionId) {
 		this.id = transactionId;
 	}
 
-
-	public int getMerchandiseId() {
-		return merchandiseId;
+	public String getListingId() {
+		return listingId;
 	}
 
+	public void setListingId(String listingId) {
+		this.listingId = listingId;
+	}
 
-	public void setMerchandiseId(int merchandiseId) {
-		this.merchandiseId = merchandiseId;
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 }
