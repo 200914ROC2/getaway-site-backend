@@ -45,11 +45,13 @@ public class StoreDelegate implements FrontControllerDelegate {
 					
 					t.setId(tServ.addToCart(uSession, t));
 					
+					System.out.println("Hello my dudes!");
 					System.out.println(t.toString());
 					
 					response.getWriter().write(om.writeValueAsString(t));
 				} else {
-					response.sendError(400, "Field listing error.");
+					response.sendError(400, uSession.toString());
+					//response.sendError(400, "Field listing error.");
 				}
 			} else {
 				response.sendError(400, "Must be logged in to shop.");
