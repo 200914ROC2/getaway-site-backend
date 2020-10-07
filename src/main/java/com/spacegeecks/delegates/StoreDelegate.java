@@ -33,8 +33,8 @@ public class StoreDelegate implements FrontControllerDelegate {
 				
 				if (jsonMap.containsKey("price") && jsonMap.containsKey("listing_id") && jsonMap.containsKey("title") && jsonMap.containsKey("image")) {
 					
-					t.setPrice((double) jsonMap.get("price"));
-					t.setListingId((String) jsonMap.get("listing_id"));
+					t.setPrice(Double.parseDouble((String) jsonMap.get("price")));
+					t.setListingId(((Integer) jsonMap.get("listing_id")));
 					t.setTitle((String) jsonMap.get("title"));
 					t.setImage((String) jsonMap.get("image"));
 					
@@ -42,6 +42,7 @@ public class StoreDelegate implements FrontControllerDelegate {
 					
 					TransactionStatus ts = new TransactionStatus();
 					ts = tServ.findTStatusByName("open");
+					t.setStatus(ts);
 					
 					t.setId(tServ.addToCart(uSession, t));
 					
