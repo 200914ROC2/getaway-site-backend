@@ -12,12 +12,15 @@ import com.spacegeecks.beans.Transaction;
 import com.spacegeecks.beans.TransactionStatus;
 import com.spacegeecks.beans.User;
 import com.spacegeecks.data.TransactionPostgres;
+import com.spacegeecks.data.UserPostgres;
 import com.spacegeecks.services.TransactionService;
+import com.spacegeecks.services.UserService;
 
 
 public class StoreDelegate implements FrontControllerDelegate {
 
 	private TransactionService tServ = new TransactionService(new TransactionPostgres());
+	private UserService uServ = new UserService(new UserPostgres());
 	
 	@Override
 	public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,6 +30,7 @@ public class StoreDelegate implements FrontControllerDelegate {
 		ObjectMapper om = new ObjectMapper();
 		
 		if ("POST".equals(request.getMethod())) {
+			System.out.println("Hello");
 
 			Map<String, Object> jsonMap = om.readValue(request.getInputStream(), Map.class);
 			if (jsonMap.containsKey("userId")) {
@@ -44,8 +48,11 @@ public class StoreDelegate implements FrontControllerDelegate {
 					
 					t.setUserId((Integer) jsonMap.get("userId"));
 					
-					t.setId(tServ.addToCart(uSession, t));
-					
+					t.setId(tServ.addToCart(uServ.getUserByID((Integer) jsonMap.get("userId")), t));
+					System.out.println("hello to find id"+ tServ.addToCart(uServ.getUserByID((Integer) jsonMap.get("userId")), t));
+					System.out.println("Hello to uSession "+uSession);
+					System.out.println("Hello to t "+t);
+					System.out.println("Hello to jsonMap"+jsonMap);
 					response.getWriter().write(om.writeValueAsString(t));
 				} else {
 					response.sendError(400, "Field listing error.");

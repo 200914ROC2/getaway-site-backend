@@ -23,20 +23,29 @@ public class CartDelegate implements FrontControllerDelegate {
 	
 	@Override
 	public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Map<String, Object> jsonMap = om.readValue(request.getInputStream(), Map.class);
 		
 		User uSession = (User) request.getSession().getAttribute("user");
-		if (uSession == null) {
-			Map<String, Object> jsonMap = om.readValue(request.getInputStream(), Map.class);
-			if (jsonMap.containsKey("userId")) {
-				uSession = uServ.getUserByID((Integer) jsonMap.get("userId"));
-			} else {
-				response.sendError(400,"Please log in to do things.");
-			}
-		}
+		User u = null;
+//		if (uSession == null) {
+//			Map<String, Object> jsonMap = om.readValue(request.getInputStream(), Map.class);
+//			if (jsonMap.containsKey("userId")) {
+//				uSession = uServ.getUserByID((Integer) jsonMap.get("userId"));
+//			} else {
+//				response.sendError(400,"Please log in to do things.");
+//			}
+//		}
 		
 		if ("GET".equals(request.getMethod())) {
-			if (uSession != null) {
-				response.getWriter().write(om.writeValueAsString(tServ.findCartByUser(uSession)));
+			System.out.println("We caught the get method for the cart");
+//			if (uSession != null) {
+//				response.getWriter().write(om.writeValueAsString(tServ.findCartByUser(uSession)));
+			if(u == null) {
+				u = uServ.getUserByID((Integer)jsonMap.get("userId"));
+			}
+			 if(u != null || jsonMap.containsKey("userId")){
+				response.getWriter().write(om.writeValueAsString(tServ.findCartByUser(uServ.getUserByID((Integer) jsonMap.get("userId")))));
+				
 			} else {
 				response.sendError(400,"Must be logged in to view cart.");
 			}
