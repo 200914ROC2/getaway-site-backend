@@ -31,6 +31,7 @@ public class CartDelegate implements FrontControllerDelegate {
 				uSession = uServ.getUserByID((Integer) jsonMap.get("userId"));
 			} else {
 				response.sendError(400,"Please log in to do things.");
+			}
 		}
 		
 		if ("GET".equals(request.getMethod())) {
