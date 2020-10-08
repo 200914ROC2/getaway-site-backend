@@ -27,6 +27,7 @@ public class StoreDelegate implements FrontControllerDelegate {
 		ObjectMapper om = new ObjectMapper();
 		
 		if ("POST".equals(request.getMethod())) {
+
 			Map<String, Object> jsonMap = om.readValue(request.getInputStream(), Map.class);
 			if (jsonMap.containsKey("userId")) {
 				
