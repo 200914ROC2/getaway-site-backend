@@ -28,7 +28,7 @@ public class CartDelegate implements FrontControllerDelegate {
 		if (!(uSession != null)) {
 			Map<String, Object> jsonMap = om.readValue(request.getInputStream(), Map.class);
 			if (jsonMap.containsKey("userId")) {
-				uSession = uServ.getUserByID((Integer) jsonMap.get("userID"));
+				uSession = uServ.getUserByID((Integer) jsonMap.get("userId"));
 			}
 		} else {
 			response.sendError(400,"Please log in to do things.");
