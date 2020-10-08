@@ -25,14 +25,14 @@ public class CartDelegate implements FrontControllerDelegate {
 	public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		User uSession = (User) request.getSession().getAttribute("user");
-		if (uSession == null) {
-			Map<String, Object> jsonMap = om.readValue(request.getInputStream(), Map.class);
-			if (jsonMap.containsKey("userId")) {
-				uSession = uServ.getUserByID((Integer) jsonMap.get("userId"));
-			} else {
-				response.sendError(400,"Please log in to do things.");
-			}
-		}
+//		if (uSession == null) {
+//			Map<String, Object> jsonMap = om.readValue(request.getInputStream(), Map.class);
+//			if (jsonMap.containsKey("userId")) {
+//				uSession = uServ.getUserByID((Integer) jsonMap.get("userId"));
+//			} else {
+//				response.sendError(400,"Please log in to do things.");
+//			}
+//		}
 		
 		if ("GET".equals(request.getMethod())) {
 			System.out.println("We caught the get method for the cart");
