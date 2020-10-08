@@ -25,7 +25,7 @@ public class CartDelegate implements FrontControllerDelegate {
 	public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		User uSession = (User) request.getSession().getAttribute("user");
-		if (!(uSession != null)) {
+		if (uSession == null) {
 			Map<String, Object> jsonMap = om.readValue(request.getInputStream(), Map.class);
 			if (jsonMap.containsKey("userId")) {
 				uSession = uServ.getUserByID((Integer) jsonMap.get("userId"));
