@@ -54,7 +54,8 @@ public class CartDelegate implements FrontControllerDelegate {
 			}
 			if (u != null) {
 				if (tServ.purchaseCart(u))
-					response.getWriter().write("You have purchased all items in your cart.");
+					response.getWriter().write(om.writeValueAsString(tServ.findCartByUser(uServ.getUserByID((Integer) jsonMap.get("userId")))));
+//					response.getWriter().write("You have purchased all items in your cart.");
 				else
 					response.getWriter().write("There was an error with your cart.");
 			}
