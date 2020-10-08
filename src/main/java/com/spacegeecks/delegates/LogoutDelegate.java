@@ -14,9 +14,11 @@ public class LogoutDelegate implements FrontControllerDelegate {
 	@Override
 	public void process(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
+		
 		if ("POST".equals(request.getMethod())) {
 			if (request.getSession(false) != null) {
 				User u = (User) request.getSession().getAttribute("user");
+							
 				response.getWriter().write("You have successfully logged out: " + u.getUsername());
 				request.getSession().invalidate();
 			} else {

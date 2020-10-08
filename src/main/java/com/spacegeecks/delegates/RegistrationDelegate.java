@@ -34,12 +34,12 @@ public class RegistrationDelegate implements FrontControllerDelegate {
 
 		Map<String, Object> jsonMap = om.readValue(request.getInputStream(), Map.class);
 		
-		if (jsonMap.containsKey("username") && jsonMap.containsKey("password") && jsonMap.containsKey("email") && jsonMap.containsKey("firstname") && jsonMap.containsKey("lastname")) {
+		if (jsonMap.containsKey("username") && jsonMap.containsKey("password") && jsonMap.containsKey("email") && jsonMap.containsKey("firstName") && jsonMap.containsKey("lastName")) {
 			u.setUsername((String) jsonMap.get("username"));
 			String password = (String) jsonMap.get("password");
 			u.setEmail((String) jsonMap.get("email"));
-			u.setFirstName((String) jsonMap.get("firstname"));
-			u.setLastName((String) jsonMap.get("lastname"));
+			u.setFirstName((String) jsonMap.get("firstName"));
+			u.setLastName((String) jsonMap.get("lastName"));
 			Role r = new Role();
 			r = uServ.getRoleByName("standard");
 			uServ.updatePassword(u, password); // The object mapper sets the pw to plantext; this hashes it.
