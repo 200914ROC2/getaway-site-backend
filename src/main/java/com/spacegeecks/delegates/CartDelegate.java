@@ -40,8 +40,10 @@ public class CartDelegate implements FrontControllerDelegate {
 			System.out.println("We caught the get method for the cart");
 //			if (uSession != null) {
 //				response.getWriter().write(om.writeValueAsString(tServ.findCartByUser(uSession)));
-			
-			 if(u != null || jsonMap.containsKey("userID")){
+			if(u == null) {
+				u = uServ.getUserByID((Integer)jsonMap.get("userId"));
+			}
+			 if(u != null || jsonMap.containsKey("userId")){
 				response.getWriter().write(om.writeValueAsString(tServ.findCartByUser(uServ.getUserByID((Integer) jsonMap.get("userId")))));
 				
 			} else {
