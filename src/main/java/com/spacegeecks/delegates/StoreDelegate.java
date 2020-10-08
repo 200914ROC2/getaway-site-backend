@@ -49,10 +49,6 @@ public class StoreDelegate implements FrontControllerDelegate {
 					t.setUserId((Integer) jsonMap.get("userId"));
 					
 					t.setId(tServ.addToCart(uServ.getUserByID((Integer) jsonMap.get("userId")), t));
-					System.out.println("hello to find id"+ tServ.addToCart(uServ.getUserByID((Integer) jsonMap.get("userId")), t));
-					System.out.println("Hello to uSession "+uSession);
-					System.out.println("Hello to t "+t);
-					System.out.println("Hello to jsonMap"+jsonMap);
 					response.getWriter().write(om.writeValueAsString(t));
 				} else {
 					response.sendError(400, "Field listing error.");
