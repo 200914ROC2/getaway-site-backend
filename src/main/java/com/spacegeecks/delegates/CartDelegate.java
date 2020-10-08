@@ -35,6 +35,7 @@ public class CartDelegate implements FrontControllerDelegate {
 		}
 		
 		if ("GET".equals(request.getMethod())) {
+			System.out.println("We caught the get method for the cart");
 			if (uSession != null) {
 				response.getWriter().write(om.writeValueAsString(tServ.findCartByUser(uSession)));
 			} else {
