@@ -27,6 +27,7 @@ public class StoreDelegate implements FrontControllerDelegate {
 		ObjectMapper om = new ObjectMapper();
 		
 		if ("POST".equals(request.getMethod())) {
+			System.out.println("Hello");
 
 			Map<String, Object> jsonMap = om.readValue(request.getInputStream(), Map.class);
 			if (jsonMap.containsKey("userId")) {
@@ -46,9 +47,9 @@ public class StoreDelegate implements FrontControllerDelegate {
 					
 					t.setId(tServ.addToCart(uSession, t));
 					
-					System.out.println("The u Session "+uSession);
-					System.out.println("The t object "+t);
-					System.out.println("The jsonMap"+jsonMap);
+					System.out.println("Hello to uSession "+uSession);
+					System.out.println("Hello to t "+t);
+					System.out.println("Hello to jsonMap"+jsonMap);
 					response.getWriter().write(om.writeValueAsString(t));
 				} else {
 					response.sendError(400, "Field listing error.");
