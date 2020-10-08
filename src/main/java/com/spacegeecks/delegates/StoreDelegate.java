@@ -27,21 +27,21 @@ public class StoreDelegate implements FrontControllerDelegate {
 		ObjectMapper om = new ObjectMapper();
 		
 		if ("POST".equals(request.getMethod())) {
-			if (uSession != null) {
-				Map<String, Object> jsonMap = om.readValue(request.getInputStream(), Map.class);
+			Map<String, Object> jsonMap = om.readValue(request.getInputStream(), Map.class);
+			if (jsonMap.containsKey("userId")) {
 				
 				TransactionStatus ts = new TransactionStatus();
 				ts = tServ.findTStatusByName("open");
 				t.setStatus(ts);
 				
-				if (jsonMap.containsKey("price") && jsonMap.containsKey("listing_id") && jsonMap.containsKey("title") && jsonMap.containsKey("image")) {
+				if (jsonMap.containsKey("price") && jsonMap.containsKey("listing_id") && jsonMap.containsKey("title") && jsonMap.containsKey("image") && jsonMap.containsKey("userId")) {
 					
 					t.setPrice(Double.parseDouble((String) jsonMap.get("price")));
 					t.setListingId(((Integer) jsonMap.get("listing_id")));
 					t.setTitle((String) jsonMap.get("title"));
 					t.setImage((String) jsonMap.get("image"));
 					
-					t.setUserId(uSession.getUserId());
+					t.setUserId((Integer) jsonMap.get("userId"));
 					
 					t.setId(tServ.addToCart(uSession, t));
 					
