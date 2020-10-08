@@ -24,8 +24,7 @@ public class CartDelegate implements FrontControllerDelegate {
 	@Override
 	public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map<String, Object> jsonMap = om.readValue(request.getInputStream(), Map.class);
-		
-		User uSession = (User) request.getSession().getAttribute("user");
+
 		User u = null;
 //		if (uSession == null) {
 //			Map<String, Object> jsonMap = om.readValue(request.getInputStream(), Map.class);
@@ -36,8 +35,8 @@ public class CartDelegate implements FrontControllerDelegate {
 //			}
 //		}
 		
-		if ("GET".equals(request.getMethod())) {
-			System.out.println("We caught the get method for the cart");
+		if ("PUT".equals(request.getMethod())) {
+			System.out.println("We caught the PUT method for the cart");
 //			if (uSession != null) {
 //				response.getWriter().write(om.writeValueAsString(tServ.findCartByUser(uSession)));
 			if(u == null) {
@@ -50,8 +49,11 @@ public class CartDelegate implements FrontControllerDelegate {
 				response.sendError(400,"Must be logged in to view cart.");
 			}
 		} else if ("POST".equals(request.getMethod())) {
-			if (uSession != null) {
-				if (tServ.purchaseCart(uSession))
+			if (u == null) {
+				u = uServ.getUserByID((Integer) jsonMap.get("userId"));
+			}
+			if (u != null) {
+				if (tServ.purchaseCart(u))
 					response.getWriter().write("You have purchased all items in your cart.");
 				else
 					response.getWriter().write("There was an error with your cart.");
