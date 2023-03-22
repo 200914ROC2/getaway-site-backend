@@ -19,7 +19,7 @@
   		<!-- tomcat catalina includes tomcat web container and servlets API -->
 		<groupId>org.apache.tomcat</groupId>
 		<artifactId>tomcat-catalina</artifactId>
-		<version>9.0.16</version>
+		<version>9.0.72</version>
 	</dependency>
 	<!-- our jackson libraries: allow us to map JSON -->
 	<dependency>
